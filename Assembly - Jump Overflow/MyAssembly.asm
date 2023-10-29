@@ -20,6 +20,7 @@ doit proc
 	; overflow bit - bit 11
 	
 	; 3^5 = 3x3x3x3x3=243	; total sum 363, total hex 16B
+	; program exercise of how many multiplyCauseAnOverflow by 3's to overflow -> overflow in etiration 20
 
 ;	 loop(ebx)		Power(eax)		totalSum(ecx)		totalHex
 ;		3^1				3				3					3
@@ -28,27 +29,35 @@ doit proc
 ;		3^4				81				120					78
 ;		3^5				243				363					16B
 	; ----- initialization -----
-	mov eax, 1
-	mov	ebx, 3
-	xor ecx, ecx
-	xor edx, edx
+;	mov eax, 1
+;	mov	ebx, 3
+;	xor ecx, ecx
+;	xor edx, edx
+;
+;again:
+;
+;	mul ebx,	
+;	;jo multiplyCauseAnOverflow		;jo - jump overflow
+;	add ecx, eax
+;	jo additionCauseAnOverflow
+;	inc counter
+;	cmp counter, 5
+;	;cmp counter, 100		; overflow value of ECX = B6D41DB8, which is over 32bits  
+;	jl again
+;
+;;multiplyCauseAnOverflow:
+;;	nop			; nop - no operation - means waste away, for breakpoint
+;additionCauseAnOverflow
+;	nop
+;	ret			; ecx --- holds the total value of 363 in Hex is 16B
+	
+	; -------- How overflow bit turn on ---------
 
-again:
+	mov eax, 0ffffffffh
+	mov ebx, 2
+	mul ebx
 
-	mul ebx,	
-	jo multiplyCauseAnOverflow
-	add ecx, eax
-	jo additionCauseAnOverflow
-	inc counter
-	cmp counter, 5
-	;cmp counter, 100		; overflow value of ECX = B6D41DB8, which is over 32bits  
-	jl again
-
-multiplyCauseAnOverflow:
-	nop			; nop - no operation - means waste away, for breakpoint
-additionCauseAnOverflow
-	nop
-	ret			; ecx --- holds the total value of 363 in Hex is 16B
+	ret
 
 	; ----------------- Assembly - Static Memory ---------------------------------------
 
