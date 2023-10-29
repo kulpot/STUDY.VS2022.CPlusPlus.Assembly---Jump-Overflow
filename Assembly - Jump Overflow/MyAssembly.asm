@@ -35,13 +35,19 @@ doit proc
 
 again:
 
-	mul ebx,		
+	mul ebx,	
+	jo multiplyCauseAnOverflow
 	add ecx, eax
+	jo additionCauseAnOverflow
 	inc counter
 	cmp counter, 5
 	;cmp counter, 100		; overflow value of ECX = B6D41DB8, which is over 32bits  
 	jl again
 
+multiplyCauseAnOverflow:
+	nop			; nop - no operation - means waste away, for breakpoint
+additionCauseAnOverflow
+	nop
 	ret			; ecx --- holds the total value of 363 in Hex is 16B
 
 	; ----------------- Assembly - Static Memory ---------------------------------------
