@@ -15,9 +15,11 @@ doit proc
 
 	; Static - means its loaded, it exist for the entire duration of the program
 	; General Purpose Registers - eax, ebx, ecx, edx 
+	; zero flag - bit 6	-> 1 if result is 0, 0 if result is not 0
+	; sign flag - bit 7	-> 1 if negative, 0 if positive
+	; overflow bit - bit 11
 	
 	; 3^5 = 3x3x3x3x3=243	; total sum 363, total hex 16B
-
 
 ;	 loop(ebx)		Power(eax)		totalSum(ecx)		totalHex
 ;		3^1				3				3					3
@@ -32,6 +34,7 @@ doit proc
 	xor edx, edx
 
 again:
+
 	mul ebx,		
 	add ecx, eax
 	inc counter
