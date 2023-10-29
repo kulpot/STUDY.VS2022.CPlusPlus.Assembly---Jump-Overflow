@@ -56,20 +56,20 @@ again:
 ;		3^4				81				120					78
 ;		3^5				243				363					16B
 	; ----- initialization -----
-	mov eax, 1
-	mov	ebx, 3
-	xor ecx, ecx
-	xor edx, edx
-
-again:
-	mul ebx,		
-	add ecx, eax
-	inc counter
-	cmp counter, 5
-	;cmp counter, 100		; overflow value of ECX = B6D41DB8, which is over 32bits  
-	jl again
-
-	ret			; ecx --- holds the total value of 363 in Hex is 16B
+;	mov eax, 1
+;	mov	ebx, 3
+;	xor ecx, ecx
+;	xor edx, edx
+;
+;again:
+;	mul ebx,		
+;	add ecx, eax
+;	inc counter
+;	cmp counter, 5
+;	;cmp counter, 100		; overflow value of ECX = B6D41DB8, which is over 32bits  
+;	jl again
+;
+;	ret			; ecx --- holds the total value of 363 in Hex is 16B
 
 	; ----------------- Assembly - Adding Up to the Nth Power ----------------------------------
 	; 3^5 = 3x3x3x3x3=243	; total sum 363, total hex 16B
